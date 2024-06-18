@@ -6,7 +6,10 @@ class Booking(models.Model):
     no_of_guests = models.IntegerField(
         validators=[MaxValueValidator(999999), MinValueValidator(-999999)]
     )
-    bookingdate = models.DateTimeField()
+    booking_date = models.DateTimeField()
+    
+    def __str__(self):
+        return f'Booking for {self.name} on {str(self.booking_date)} for {str(self.no_of_guests)}'
     
 class Menu(models.Model):
     title = models.CharField(max_length=255)
@@ -15,3 +18,5 @@ class Menu(models.Model):
         validators=[MaxValueValidator(99999), MinValueValidator(-99999)]
     )
     
+    def __str__(self):
+        return f'{self.title} : {str(self.price)}'
