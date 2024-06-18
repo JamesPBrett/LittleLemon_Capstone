@@ -75,3 +75,7 @@ NOTE: Please enter your own database details, create users and tokens manually o
         }
     ```
 * DELETE http://127.0.0.1:8000/restaurant/booking/tables/1 - Deletes Booking
+
+## Run Unit tests
+
+```python manage.py test```
