@@ -22,7 +22,7 @@ from rest_framework.routers import DefaultRouter
 from restaurant.views import BookingViewSet  
 
 # Create an instance of DefaultRouter
-router = DefaultRouter()
+router = DefaultRouter(trailing_slash=False)
 
 # Register the BookingViewSet with the router
 router.register(r'tables', BookingViewSet)

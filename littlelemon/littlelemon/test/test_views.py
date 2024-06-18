@@ -19,7 +19,7 @@ class MenuItemsViewTests(APITestCase):
         self.menu2 = Menu.objects.create(title="Item Two", price=19.99, inventory=10)
 
     def test_getall(self):
-        url = '/restaurant/menu/'
+        url = '/restaurant/menu'
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 2)
@@ -27,7 +27,7 @@ class MenuItemsViewTests(APITestCase):
         self.assertEqual(response.data[1]['title'], 'Item Two')
 
     def test_create_menu_item(self):
-        url = '/restaurant/menu/'
+        url = '/restaurant/menu'
         data = {
             'title': 'Item Three',
             'price': 29.99,
@@ -64,7 +64,7 @@ class MenuItemsViewTests(APITestCase):
 
     def test_unauthenticated_access(self):
         self.client.credentials()  # Remove the token
-        url = '/restaurant/menu/'
+        url = '/restaurant/menu'
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
         
@@ -83,21 +83,21 @@ class BookingViewSetTests(APITestCase):
 
         
     def test_list_bookings(self):
-        url = '/restaurant/booking/tables/'  # Specify the URL directly
+        url = '/restaurant/booking/tables'  # Specify the URL directly
         response = self.client.get(url)
         # print(response.data)  # Print response data for debugging
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 2)    
 
     def test_retrieve_booking(self):
-        url = f'/restaurant/booking/tables/{self.booking1.id}/'  # Specify the URL directly
+        url = f'/restaurant/booking/tables/{self.booking1.id}'  # Specify the URL directly
         response = self.client.get(url)
         # print(response.data)  # Print response data for debugging
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['name'], 'Booking One')
 
     def test_create_booking(self):
-        url = '/restaurant/booking/tables/'  # Specify the URL directly
+        url = '/restaurant/booking/tables'  # Specify the URL directly
         data = {
             'name': 'Booking Three',
             'no_of_guests': 3,
@@ -109,7 +109,7 @@ class BookingViewSetTests(APITestCase):
         self.assertEqual(Booking.objects.last().name, 'Booking Three')
 
     def test_update_booking(self):
-        url = f'/restaurant/booking/tables/{self.booking1.id}/'  # Specify the URL directly
+        url = f'/restaurant/booking/tables/{self.booking1.id}'  # Specify the URL directly
         data = {
             'name': 'Updated Booking One',
             'no_of_guests': 5,
@@ -122,13 +122,13 @@ class BookingViewSetTests(APITestCase):
         self.assertEqual(self.booking1.no_of_guests, 5)
 
     def test_delete_booking(self):
-        url = f'/restaurant/booking/tables/{self.booking1.id}/'  # Specify the URL directly
+        url = f'/restaurant/booking/tables/{self.booking1.id}'  # Specify the URL directly
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(Booking.objects.count(), 1)
 
     def test_unauthenticated_access(self):
         self.client.credentials()  # Remove the token
-        url = '/restaurant/booking/tables/'  # Specify the URL directly
+        url = '/restaurant/booking/tables'  # Specify the URL directly
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
