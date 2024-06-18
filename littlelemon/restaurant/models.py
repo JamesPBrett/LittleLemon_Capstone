@@ -8,8 +8,8 @@ class Booking(models.Model):
     )
     booking_date = models.DateTimeField()
     
-    def get_item(self):
-        return f'{self.name} : {str(self.booking_date)}'
+    def __str__(self):
+        return f'Booking for {self.name} on {str(self.booking_date)} for {str(self.no_of_guests)}'
     
 class Menu(models.Model):
     title = models.CharField(max_length=255)
@@ -17,5 +17,6 @@ class Menu(models.Model):
     inventory = models.IntegerField(
         validators=[MaxValueValidator(99999), MinValueValidator(-99999)]
     )
-    def get_item(self):
-        return f'{self.title} : {str(self.price)}'  
+    
+    def __str__(self):
+        return f'{self.title} : {str(self.price)}'
